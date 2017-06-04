@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: ReplicaSet
+metadata:
+  name: mongo
+spec:
+  replicas: 5
+  template:
+    metadata:
+      labels:
+        app: mongo
+        version: "1.0.0"
+    spec:
+      containers:
+      - name: mongo-replica
+        image: "mongo"
