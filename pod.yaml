@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: volume-demo
+spec:
+  containers:
+  - image: mongo
+    name: volume-demo-pod
+  volumes:
+  - name: "volume"
+    hostPath:
+      path: "/home/mc/resources/volumes/demo"
