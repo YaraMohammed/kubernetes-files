@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: "DaemonSet"
+metadata:
+  labels:
+    app: mongo
+  name: mongo
+spec:
+  template:
+    metadata:
+      labels:
+        app: mongo
+    spec:
+      containers:
+      - name: mongo
+        image: mongo
+      nodeSelector:
+        lab: "true"
