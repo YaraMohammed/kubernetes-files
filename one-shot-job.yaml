@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: demo
+spec:
+  template:
+    metadata:
+      name: demo
+    spec:
+      containers:
+      - name: demo
+        image:  kelseyhightower/fizzbuzz
+      restartPolicy: OnFailure
