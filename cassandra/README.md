@@ -6,3 +6,6 @@ vim daemon-set.yaml
 
 3- in each node make new directory 
 mkdir -p $HOME/data/cassandra
+
+4- create the service definition file
+vim service.yaml
