@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  labels:
+    name: cassandra
+  name: cassandra
+spec:
+  template:
+    metadata:
+      labels:
+        app: cassandra
+    spec:
+      containers:
+        - image: cassandra
+          name: cassandra
+          resources:
+            requests:
+              cpu: 0.5
+          volumeMounts:
+            - mountPath: /cassandra_data
+              name: data
+      nodeSelector:
+        test: "cassandra"
+      volumes:
+        - name: data
+          hostPath:
+            path: "/home/mc/data/cassandra"
