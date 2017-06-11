@@ -1,3 +1,40 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cassandra-seed
+spec:
+   containers:
+    - image: cassandra
+      name: cassandra
+      resources:
+        requests:
+          cpu: 0.5
+      volumeMounts:
+        - mountPath: /cassandra_data
+          name: data
+      env:
+        - name: MAX_HEAP_SIZE
+          value: 512M
+        - name: HEAP_NEWSIZE
+          value: 512M
+        - name: CASSANDRA_SEED
+          value: "cassandra-seed"
+        - name: CASSANDRA_CLUSTER_NAME
+          value: "Tracking"
+        - name: CASSANDRA_DC
+          value: "West-Europe"
+        - name: CASSANDRA_RACK
+          value: "Rack-1"
+        - name: CASSANDRA_AUTO_BOOTSTRAP
+          value: "false"
+   nodeSelector:
+     test: "cassandra"
+   volumes:
+     - name: data
+       hostPath:
+         path: "/home/mc/data/cassandra"
+---
+
 apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
@@ -24,7 +61,7 @@ spec:
               value: 512M
             - name: HEAP_NEWSIZE
               value: 512M
-            - name: CASSANDRA_SEED_PROVIDER
+            - name: CASSANDRA_SEED
               value: "cassandra-seed"
             - name: CASSANDRA_CLUSTER_NAME
               value: "Tracking"
